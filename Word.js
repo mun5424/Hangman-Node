@@ -16,10 +16,11 @@ var Word = function(word)
         for(var i = 0; i < this.letters.length; i++)
         {
             var letter = this.letters[i]; 
-            str += letter.getLetter();
+            str += letter.getLetter() + " ";
         }
         return str; 
     }
+    
     this.guessLetter = function(character)
     {
         for(var i = 0; i < this.letters.length; i++)

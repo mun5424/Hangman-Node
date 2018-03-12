@@ -6,7 +6,7 @@ var Letter = function(character)
     this.guessed = false; 
     this.getLetter = function() 
     {
-        if(this.guessed)
+        if(this.guessed || this.character == " ")
             return this.character;
         else
             return "_";

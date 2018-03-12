@@ -9,6 +9,8 @@ var guessesRemaining = 10;
 
 
 var word = new Word(artists[Math.floor(Math.random() * artists.length)]);
+var wrongGuesses = [];
+
 
 var runGame = function (word) {
 
@@ -30,18 +32,37 @@ var runGame = function (word) {
                 if (word.guessedAll()) {
                     console.log("You got it right! Next word!");
                     var nextWord = new Word(artists[Math.floor(Math.random() * artists.length)]);
+                    guessesRemaining = 10; 
                     runGame(nextWord);
                 }
                 else {
-                    console.log(word.word.indexOf(guess));
                     if (word.word.indexOf(guess) !== -1) {
-                        console.log("CORRECT!!");
+                        console.log("\x1b[32m", "CORRECT!!");
+                        runGame(word); 
                     }
                     else {
-                        guessesRemaining--;
-                        console.log("INCORRECT!! " + guessesRemaining + " guesses remaning!");
+                        if(wrongGuesses.indexOf(guess) !== -1)
+                        {
+                            console.log("\x1b[31m", "You have already guessed that letter! \n");
+                            runGame(word); 
+                        }
+                        else
+                        {
+                            wrongGuesses.push(guess);
+                            guessesRemaining--;
+                            if(guessesRemaining == 0) 
+                            {
+                                console.log("You have no more guesses! the correct word was " + word.word);
+                                var nextWord = new Word(artists[Math.floor(Math.random() * artists.length)]);
+                                guessesRemaining = 10; 
+                                runGame(nextWord);
+                            }
+                            else{
+                                console.log("\x1b[31m", "INCORRECT!! " + guessesRemaining + " guesses remaining! \n");
+                                runGame(word); 
+                            }
+                        }
                     }
-                    runGame(word);
                 }
             }
         }
