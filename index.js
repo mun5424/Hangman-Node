@@ -27,17 +27,17 @@ var runGame = function (word) {
             }
             else {
                 word.guessLetter(guess);
-                console.log(word.stringify());
+                console.log("\n"+ word.stringify() + "\n") ;
 
                 if (word.guessedAll()) {
-                    console.log("You got it right! Next word!");
+                    console.log("You got it right! Next word! \n");
                     var nextWord = new Word(artists[Math.floor(Math.random() * artists.length)]);
                     guessesRemaining = 10; 
                     runGame(nextWord);
                 }
                 else {
                     if (word.word.indexOf(guess) !== -1) {
-                        console.log("\x1b[32m", "CORRECT!!");
+                        console.log("\x1b[32m", "CORRECT!! \n");
                         runGame(word); 
                     }
                     else {
@@ -52,7 +52,7 @@ var runGame = function (word) {
                             guessesRemaining--;
                             if(guessesRemaining == 0) 
                             {
-                                console.log("You have no more guesses! the correct word was " + word.word);
+                                console.log("You have no more guesses! the correct word was " + word.word + "\n");
                                 var nextWord = new Word(artists[Math.floor(Math.random() * artists.length)]);
                                 guessesRemaining = 10; 
                                 runGame(nextWord);
